@@ -138,8 +138,9 @@ def get_flattened_tensors():
     return combined_tensor, energy_tensor
     
 def train_test_normal_neural_network(model_number):
-    combined_tensor, energy_tensor = get_flattened_tensors()
-    
+    #combined_tensor, energy_tensor = get_flattened_tensors()
+    from distance_array import create_distance_array
+    combined_tensor, energy_tensor = create_distance_array()
     # Create a dataset
     dataset = MoleculeDataset(combined_tensor, energy_tensor)
     
@@ -175,7 +176,7 @@ def train_test_normal_neural_network(model_number):
 
     #criterion = torch.nn.MSELoss()
     criterion = nn.SmoothL1Loss()
-    results = training_loop(model_neural_network, training_loader, validation_loader, optimizer, criterion, epochs=5)
+    results = training_loop(model_neural_network, training_loader, validation_loader, optimizer, criterion, epochs=10)
     training_loss = results['training_loss']
     validation_loss = results['validation_loss']
     best_val_loss = results['best_val_loss']
@@ -315,7 +316,7 @@ def testing(model, testing_loader, criterion, model_number):
     plt.xlabel('Actual Energy')
     plt.ylabel('Predicted Energy')
     plt.title('Predicted vs Actual Energy Values')
-    plt.savefig(f'saved_plots/prediction_vs_actual{model_number}.png')
+    plt.savefig(f'saved_plots/prediction_vs_actual_distances{model_number}.png')
     plt.close()
     
     plt.figure(figsize=(8, 8))
@@ -324,7 +325,7 @@ def testing(model, testing_loader, criterion, model_number):
     plt.xlabel('Actual Value')
     plt.ylabel('Absolute Error')
     plt.title('Absolute Error of Predictions')
-    plt.savefig(f'saved_plots/absolute_error_actual{model_number}.png')
+    plt.savefig(f'saved_plots/absolute_error_actual_distances{model_number}.png')
     plt.close()
     
     return {
