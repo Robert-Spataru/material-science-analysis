@@ -1,2 +1,1 @@
-Material Science Analysis using ML model
-GC_Notebook- contains code that I used in google collab to sort the data out and store into .csv files
+Material Science Analysis using ML model that predicts energy levels of a given molecule strucutre that contains a fixed amount of lutethium (Lu8), and a varying amount of hydrogen and nitrogen. Best MaE achieved was 0.17 using a fully connected neural network approach. 
